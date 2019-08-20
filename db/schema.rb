@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_18_055318) do
-
-  create_table "offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "organization_id"
-    t.bigint "volunteer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["organization_id"], name: "index_offers_on_organization_id"
-    t.index ["volunteer_id"], name: "index_offers_on_volunteer_id"
-  end
+ActiveRecord::Schema.define(version: 2019_08_18_225633) do
 
   create_table "organizations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -32,11 +23,11 @@ ActiveRecord::Schema.define(version: 2019_08_18_055318) do
     t.text "summary"
     t.string "location"
     t.string "date"
+    t.bigint "organization_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
+    t.index ["organization_id"], name: "index_volunteers_on_organization_id"
   end
 
-  add_foreign_key "offers", "organizations"
-  add_foreign_key "offers", "volunteers"
+  add_foreign_key "volunteers", "organizations"
 end

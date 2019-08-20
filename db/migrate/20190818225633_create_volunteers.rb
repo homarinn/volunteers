@@ -5,6 +5,7 @@ class CreateVolunteers < ActiveRecord::Migration[5.2]
       t.text :summary
       t.string :location
       t.string :date
+      t.references :organization, foreign_key: true
 
       t.timestamps
     end
