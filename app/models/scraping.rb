@@ -14,7 +14,7 @@ class Scraping
       location_element: '//*[@id="main"]/section/div/div[1]/div/article/section[2]/div/table/tbody/tr[3]/td',
       date_element: '//*[@id="main"]/section/div/div[1]/div/article/section[1]/div[1]/div[3]/table/tbody/tr[1]/td',
       next_element: '//*[@id="all-search-results"]/div[3]/div/nav/nav/ul/li[7]/a',
-      organizer_element: '//*[@id="main"]/section/div/div[1]/div/article/section[2]/div/table/tbody/tr[10]/td'
+      organizer_element: "//*[@id='main']/section/div/div[1]/div/article/section[2]/div/table/tbody/tr[th[contains(text(), '主催者')]]/td"
     )
   end
   
@@ -28,7 +28,7 @@ class Scraping
       location_element: '//*[@id="main_content"]/div[2]/div[1]/div[2]/p[2]',
       date_element: '//*[@id="main_content"]/div[2]/div[1]/div[1]/div[1]/p[2]',
       next_element: "//*[@id='search_result']/div/div/div/a[contains(text(), '>')]",
-      organizer_element: '//*[@id="main_content"]/div[2]/div[2]/table/tbody/tr[10]/td/a'
+      organizer_element: "//*[@id='main_content']/div[2]/div[2]/table/tr[th[contains(text(), '開催団体')]]/td/a/span"
     )
   end
 
@@ -43,7 +43,7 @@ class Scraping
     location_element:, 
     date_element:,
     next_element:,
-    organizer_element: nil
+    organizer_element:
   )
     links = []
     agent = Mechanize.new
