@@ -96,18 +96,8 @@ class Scraping
       location: fetch_location_or_date(page, location_element),
       date: fetch_location_or_date(page, date_element)
     }
-
-    organizer = page.at(organizer_element).inner_text if page.at(organizer_element)
-    if Organization.find_by(name: organizer)
-      organization = Organization.find_by(name: organizer)
-      organization_id = organization.id
-    else
-      organization_id = nil
-    end
-
-    volunteer = Volunteer.where(volunteer_datas).first_or_initialize
-    volunteer.organization_id = organization_id
-    volunteer.save
+    organization_id = fetch_organization_id(page, organizer_element)
+    vorlunteer_save(volunteer_datas, organization_id)
   end
 
   def self.fetch_title_or_summary(page, element)
@@ -116,5 +106,20 @@ class Scraping
 
   def self.fetch_location_or_date(page, element)
     page.at(element).inner_text.gsub(/\r\n|\r|\n|\s|\t/, "") if page.at(element)
+  end
+
+  def self.fetch_organization_id(page, element)
+    organizer = page.at(element).inner_text if page.at(element)
+    if organization = Organization.find_by(name: organizer)
+      organization.id
+    else
+      nil
+    end
+  end
+
+  def self.vorlunteer_save(volunteer_datas, organization_id)
+    volunteer = Volunteer.where(volunteer_datas).first_or_initialize
+    volunteer.organization_id = organization_id
+    volunteer.save
   end
 end
